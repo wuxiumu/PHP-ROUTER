@@ -2,7 +2,7 @@
 
 require 'Ms.php';
 
-use Ms;
+use core\lib\router\Ms;
 
 Ms::get('/', function() {
   echo "Welcome";
@@ -17,3 +17,5 @@ Ms::error(function() {
 });
 
 Ms::dispatch();
+
+//php -S localhost:8000
