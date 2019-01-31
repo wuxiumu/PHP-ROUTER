@@ -36,7 +36,7 @@ Ms::get('/', 'Controllers\demo@index');
 Ms::get('page', 'Controllers\demo@page');
 Ms::get('view/(:num)', 'Controllers\demo@view');
 
-Macaw::dispatch();
+Ms::dispatch();
 ```
 demo.php
 ```
