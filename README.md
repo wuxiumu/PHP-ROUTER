@@ -24,3 +24,62 @@ Ms::get('/',function(){...})
 Ms::dispatch();
 ```
 方法才是真正处理当前 URL 的地方。能直接匹配到的会直接调用回调，不能直接匹配到的将利用正则进行匹配。
+
+## DEMO
+index.php:
+```
+require 'Ms.php';
+
+use core\lib\router\Ms;
+
+Ms::get('/', 'Controllers\demo@index');
+Ms::get('page', 'Controllers\demo@page');
+Ms::get('view/(:num)', 'Controllers\demo@view');
+
+Macaw::dispatch();
+```
+demo.php
+```
+<?php
+namespace controllers;
+
+class Demo {
+
+    public function index()
+    {
+        echo 'home';
+    }
+
+    public function page()
+    {
+        echo 'page';
+    }
+
+    public function view($id)
+    {
+        echo $id;
+    }
+
+}
+
+```
+
+.htaccess(Apache):
+```
+RewriteEngine On
+RewriteBase /
+
+# Allow any files or directories that exist to be displayed directly
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteRule ^(.*)$ index.php?$1 [QSA,L]
+```
+.htaccess(Nginx):
+```
+rewrite ^/(.*)/$ /$1 redirect;
+
+if (!-e $request_filename){
+	rewrite ^(.*)$ /index.php break;
+}
+```
