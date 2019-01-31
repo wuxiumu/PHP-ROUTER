@@ -1,5 +1,7 @@
 <?php
 
+namespace core\lib\router;
+
 class Ms {
   public static $halts = false;
   public static $routes = array();
